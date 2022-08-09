@@ -1,0 +1,21 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qizračunajte varianco dohodka, pojasnjeno s četrtmi, in preostalo (rezidualno) varianco.\\E$"}
+{"rule":"MORFOLOGIK_RULE_SL_SI","sentence":"^\\QPri najlonskih palicah so preizkušali lomljivost (Bennett in Franklin, 1954).\\E$"}
+{"rule":"MORFOLOGIK_RULE_SL_SI","sentence":"^\\QZdružite zadnje tri vrednosti in s posplošenim Pearsonovim preizkusom hi kvadrat preizkusite osnovno ničelno domnevo proti alternativni domnevi, da ima število lomov katero drugo porazdelitev (glejte razdelek 9.5 v knjigi).\\E$"}
+{"rule":"KATERI_BREZ_VEJICE","sentence":"^\\QZdružite zadnje tri vrednosti in s posplošenim Pearsonovim preizkusom hi kvadrat preizkusite osnovno ničelno domnevo proti alternativni domnevi, da ima število lomov katero drugo porazdelitev (glejte razdelek 9.5 v knjigi).\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QNamesto tega uporabite metodo bootstrap.: simulirajte \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q vrednosti preizkusne statistike pri ničelni domnevi, pri čemer za \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q vzemite oceno iz točke (a)..\\E$"}
+{"rule":"MORFOLOGIK_RULE_SL_SI","sentence":"^\\QUporabite preizkus iz prejšnje točke na danih podatkih, vedite pa, da Wilksovega izreka ne morete uporabiti (premislite, zakaj pogoji niso izpolnjeni).\\E$"}
+{"rule":"STEVILA_DO_10","sentence":"^\\QPrimerjajte dohodke po četrtih, tako da narišete vzporedne škatle z brki (glejte razdelek 10.6 v knjigi).\\E$"}
+{"rule":"STEVILA_DO_10","sentence":"^\\QZdružite zadnje tri vrednosti in s posplošenim Pearsonovim preizkusom hi kvadrat preizkusite osnovno ničelno domnevo proti alternativni domnevi, da ima število lomov katero drugo porazdelitev (glejte razdelek 9.5 v knjigi).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtelesna višina TEZA.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtelesna teža STAROST.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qstarost v letih SPOL.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdruga meritev pulza LETO.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qprva meritev pulza PULZ2.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qleto meritve \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qšt.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qpalic št.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlomov \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"MORFOLOGIK_RULE_SL_SI","sentence":"^\\Q[c].66. Pri najlonskih palicah so preizkušali lomljivost (Bennett in Franklin, 1954).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlomov št.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qpalic \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}

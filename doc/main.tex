@@ -1,0 +1,113 @@
+\documentclass[a4paper]{article}
+
+\input{homework.tex}
+
+\newcommand{\hmwkTitle}{Projektna naloga}
+\newcommand{\hmwkDueDate}{9.~2022}
+\newcommand{\hmwkClass}{Statistika}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{}
+\newcommand{\hmwkAuthorName}{\textbf{Strah},~27181100}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    V datoteki \texttt{Kibergrad} se nahajajo informacije o \(43.886\) družinah, ki stanujejo v mestu \emph{Kibergrad}. Mesto ima štiri četrti: v severni četrti stanuje \(10.149\) družin, v vzhodni \(10.390\), v južni \(13.457\) in v zahodni \(9.890\). Za vsako družino so zabeleženi naslednji podatki (ne boste potrebovali vseh):
+    \begin{itemize}
+        \item Tip družine (od \(1\) do \(3\))
+              \item Število članov družine
+              \item Število otrok v družini
+              \item Skupni dohodek družine
+              % \item Četrt, v kateri stanuje družina:
+        \item Četrt, v kateri stanuje družina:
+              \begin{enumerate}[1:]
+                  \item Severna
+                  \item Vzhodna
+                  \item Južna
+                  \item Zahodna
+              \end{enumerate}
+        \item Stopnja izobrazbe vodje gospodinjstva (od \(31\) do \(46\))
+    \end{itemize}
+    Iz vsake četrti vzemite enostavni slučajni vzorec velikosti \(100\).
+
+    \part Primerjajte dohodke po četrtih, tako da narišete vzporedne škatle z brki (glejte razdelek 10.6 v knjigi). Je videti, da so določenih četrtih dohodki višji?
+
+    \part Iz severne četrti vzemite še štiri enostavne slučajne vzorce velikosti \(100\). Za vseh pet vzorcev iz severne četrti spet narišite vzporedne škatle z brki. Komentirajte!
+
+    \part Za celotni Kibergrad izračunajte varianco dohodka, pojasnjeno s četrtmi, in preostalo (rezidualno) varianco. Kako se to ujema z opažanji od prej?
+\end{homeworkProblem}
+
+\newpage
+
+\begin{homeworkProblem}
+    % \vspace{-1.5em}
+    \parbox[c]{.66\textwidth}{
+        Pri najlonskih palicah so preizkušali lomljivost (Bennett in Franklin, 1954). V podobnih okoliščinah so ulili \(280\) palic in vsako od njih preizkusili na petih mestih. Rezultati poskusa so prikazani v tabeli na desni.
+        Če ima palica enakomerno strukturo, bi moralo biti število mest, na katerih se je zlomila, porazdeljeno binomsko \(\bin{5}{p}\) za določen neznan \(p\). To naj bo naša osnovna ničelna domneva. Privzamemo tudi, da so palice med seboj neodvisne.
+    }\hspace{2em}
+    \begin{tabular}{|c|c|}
+        \hline
+        št. lomov & št. palic \\
+        \hline
+        \(0\)     & \(157\)   \\
+        \(1\)     & \( 69\)   \\
+        \(2\)     & \( 35\)   \\
+        \(3\)     & \( 17\)   \\
+        \(4\)     & \(  1\)   \\
+        \(5\)     & \(  1\)   \\
+        \hline
+    \end{tabular}
+
+    \part Ob predpostavki osnovne ničelne domneve ocenite \(p\) po metodi največjega verjetja.
+
+    \part Združite zadnje tri vrednosti in s posplošenim Pearsonovim preizkusom hi kvadrat preizkusite osnovno ničelno domnevo proti alternativni domnevi, da ima
+    število lomov katero drugo porazdelitev (glejte razdelek 9.5 v knjigi). Še vedno
+    privzamemo, da ima število lomov na vseh palicah enako porazdelitev.
+
+    \part Za \( i ∈ \{1, …, n\} \) naj bodo dana neodvisna opažanja \(Xᵢ ~ \bin{mᵢ}{pᵢ}\), kjer
+    so parametri \(mᵢ\) znani, parametri \(pᵢ\) pa neznani. Razvijte preizkus na podlagi
+    razmerja verjetij, ki bo preizkusil ničelno domnevo, da so vsi parametri \(pᵢ\) enaki,
+    proti alternativni domnevi, da temu ni tako.
+
+    \part Uporabite preizkus iz prejšnje točke na danih podatkih, vedite pa, da Wilksovega izreka ne morete uporabiti (premislite, zakaj pogoji niso izpolnjeni).
+    Namesto tega uporabite metodo \emph{bootstrap}: simulirajte \(10.000\) vrednosti preizkusne statistike pri ničelni domnevi, pri čemer za \(p\) vzemite oceno iz točke \textbf{(a)}. Nato poglejte, koliko teh vrednosti presega vrednost preizkusne statistike, izračunano na konkretnih podatkih. Na podlagi tega ustrezno sklepajte, kaj storiti z ničelno domnevo.
+
+\end{homeworkProblem}
+
+\newpage
+
+\begin{homeworkProblem}
+    V neki raziskavi:
+    \[\text{\url{http://www.statsci.org/data/oz/ms212.html}}\]
+    so študentom merili pulz. Vsakemu študentu so pulz izmerili dvakrat.
+    Določeni so imeli med obema meritvama fizično obremenitev (tek na mestu), določeni ne.
+    Podatki so zbrani v tabeli \texttt{Pulz}, pri čemer imajo stolpci naslednje pomene:\\
+    \begin{tabular}{l l}
+        \texttt{VISINA}      & telesna višina                                                        \\
+        \texttt{TEZA}        & telesna teža                                                          \\
+        \texttt{STAROST}     & starost v letih                                                       \\
+        \texttt{SPOL}        & \(1=\)moški, \(2=\)ženski                                             \\
+        \texttt{KADI}        & \(1=\)kadilec, \(2=\)nekadilec                                        \\
+        \texttt{ALKOHOL}     & \(1=\)pije, \(2=\)ne pije                                             \\
+        \texttt{VADBA}       & \(1=\)vadi veliko, \(2=\)vadi zmerno, \(3=\)vadi malo ali pa sploh ne \\
+        \texttt{OBREMENITEV} & \(1=\)obremenitev, \(2=\)brez obremenitve                             \\
+        \texttt{PULZ1}       & prva meritev pulza                                                    \\
+        \texttt{PULZ2}       & druga meritev pulza                                                   \\
+        \texttt{LETO}        & leto meritve \((1993-1998)\)
+    \end{tabular}
+
+    \part Preizkusite, ali to, ali so bili študenti deležni obremenitve, vpliva na spremembo
+    pulza.
+
+    \part Se zdi, da so določeni študenti, ki so bili določeni za obremenitev, morda
+    goljufali in sploh niso tekli? Ilustrirajte s primernim grafičnim prikazom.
+
+    \part Pri študentih, ki so bili deležni obremenitve, preizkusite, ali vadba vpliva na
+    spremembo pulza.
+\end{homeworkProblem}
+
+\end{document}

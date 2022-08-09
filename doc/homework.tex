@@ -1,0 +1,194 @@
+% LTeX: enabled=false
+% Kodiranje in podpora slovenščini
+\usepackage[T1]{fontenc}        % kodiranje znakov v .pdf
+\usepackage[slovene]{babel}
+
+\usepackage{fontspec}
+\usepackage{lualatex-math}
+\usepackage{unicode-math}
+
+% \setmainfont{TeX Gyre Pagella}
+% \setmathfont{TeX Gyre Pagella Math}
+\setmathfont{Latin Modern Math}
+\setmathfont{Asana Math}[range={scr}]
+\setmathfont{STIX Two Math-Regular}[range={bb}]
+% \setmathfont{Asana Math}[range={"007B,"007D}]  % {}
+\setmathfont{Asana Math}[range={8709, \setminus}]  % U+2205, emptyset
+
+
+% \usepackage{concrete}           % pisave po okusu Donalda Knutha
+
+% Ta paket potrebujemo, ker amsart spreminja male črke v velike v naslovu,
+% in tega ne zna pravilno delati s šumniki. Paket textcase ta problem odpravi.
+% Glej: https://tex.stackexchange.com/questions/211305/problem-with-greek-title
+\usepackage{textcase}
+
+% Paketi za matematiko
+
+\undef\eth
+\undef\digamma
+\undef\backepsilon
+\usepackage{amsmath}  % razna okolja za poravnane enačbe ipd.
+\usepackage{amsthm}   % definicije okolij za izreke, definicije, ...
+% \usepackage{xypic}    % paket za diagrame
+
+% \usepackage{mathtools}
+
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+% \usepackage[plain]{algorithm}
+% \usepackage{algpseudocode}
+% \usepackage{listings}
+\usepackage{minted}
+\usepackage{hyperref}
+
+\usetikzlibrary{cd,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\headheight=12.5pt
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass:\ \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Naloga \arabic{#1} se nadaljuje na naslednji strani\ldots}\nobreak{}
+    \nobreak\extramarks{Naloga \arabic{#1} (nadaljevanje)}{Naloga \arabic{#1} se nadaljuje na naslednji strani\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Naloga \arabic{#1} (nadaljevanje)}{Naloga \arabic{#1} se nadaljuje na naslednji strani\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Naloga \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{solCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Naloga \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Naloga \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \setcounter{solCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Rok\ oddaje\ \hmwkDueDate}\\
+    % \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+% \renewcommand{\part{}}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+\renewcommand{\part}{
+    \vspace{10pt}
+    \textbf{(\alph{partCounter})}
+    \stepcounter{partCounter}
+}
+
+% Alias for the Solution section header
+\newcommand{\solution}[1][*]{
+    \vspace{10pt}
+    \ifx#1*
+        \textbf{Rešitev (\alph{solCounter})}
+        \stepcounter{solCounter}
+    \else
+        \textbf{Rešitev}
+    \fi
+}
+
+\newcommand{\example}{
+    \vspace{10pt}
+    \textbf{Primer:}\\
+}
+
+\renewcommand{\d}{\;\mathrm d}
+% \newcommand{\vphi}{\phi}
+\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\bar}{\overline}
+\newcommand{\subs}{\subseteq}
+\newcommand{\nin}{\not\in}
+
+\newcommand{\p}[1]{\left( {#1} \right)}
+\newcommand{\set}[2]{\left\{ #1 \mid #2 \right\}}
+\newcommand{\newfrac}[2]{{}^{#1}\!/_{\!#2}}
+\newcommand{\quot}[2]{\newfrac{#1}{#2}}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\id}{id}
+\newcommand{\mb}[1]{\mathbold{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\cc}{\complement}
+
+\newcommand{\bin}[2]{\mathrm{Bin}{\p{#1, #2}}}
+
+\newcommand{\for}[2]{\forall#1.\;#2}
+\newcommand{\exist}[2]{\exists\;#1\smallni:\;#2}
+\newcommand{\existi}[2]{\exists!\;#1\smallni:\;#2}
+
+\renewcommand{\check}{ \(\checkmark\)}
+
+\makeatletter
+\newcommand{\oset}[3][0ex]{%
+  \mathrel{\mathop{#3}\limits^{
+    \vbox to#1{\kern-2\ex@
+    \hbox{$\scriptstyle#2$}\vss}}}}
+\makeatother
