@@ -15,99 +15,211 @@
 
 \pagebreak
 
-\begin{homeworkProblem}
-    V datoteki \texttt{Kibergrad} se nahajajo informacije o \(43.886\) družinah, ki stanujejo v mestu \emph{Kibergrad}. Mesto ima štiri četrti: v severni četrti stanuje \(10.149\) družin, v vzhodni \(10.390\), v južni \(13.457\) in v zahodni \(9.890\). Za vsako družino so zabeleženi naslednji podatki (ne boste potrebovali vseh):
-    \begin{itemize}
-        \item Tip družine (od \(1\) do \(3\))
-              \item Število članov družine
-              \item Število otrok v družini
-              \item Skupni dohodek družine
-              % \item Četrt, v kateri stanuje družina:
-        \item Četrt, v kateri stanuje družina:
-              \begin{enumerate}[1:]
-                  \item Severna
-                  \item Vzhodna
-                  \item Južna
-                  \item Zahodna
-              \end{enumerate}
-        \item Stopnja izobrazbe vodje gospodinjstva (od \(31\) do \(46\))
-    \end{itemize}
-    Iz vsake četrti vzemite enostavni slučajni vzorec velikosti \(100\).
-
-    \part Primerjajte dohodke po četrtih, tako da narišete vzporedne škatle z brki (glejte razdelek 10.6 v knjigi). Je videti, da so določenih četrtih dohodki višji?
-
-    \part Iz severne četrti vzemite še štiri enostavne slučajne vzorce velikosti \(100\). Za vseh pet vzorcev iz severne četrti spet narišite vzporedne škatle z brki. Komentirajte!
-
-    \part Za celotni Kibergrad izračunajte varianco dohodka, pojasnjeno s četrtmi, in preostalo (rezidualno) varianco. Kako se to ujema z opažanji od prej?
-\end{homeworkProblem}
-
-\newpage
+Vse naloge so rešene z orodjem Jupyter, ki kot jedro uporablja SageMath.
+Za diagrame uporabljam matplotlib.
 
 \begin{homeworkProblem}
-    % \vspace{-1.5em}
-    \parbox[c]{.66\textwidth}{
-        Pri najlonskih palicah so preizkušali lomljivost (Bennett in Franklin, 1954). V podobnih okoliščinah so ulili \(280\) palic in vsako od njih preizkusili na petih mestih. Rezultati poskusa so prikazani v tabeli na desni.
-        Če ima palica enakomerno strukturo, bi moralo biti število mest, na katerih se je zlomila, porazdeljeno binomsko \(\bin{5}{p}\) za določen neznan \(p\). To naj bo naša osnovna ničelna domneva. Privzamemo tudi, da so palice med seboj neodvisne.
-    }\hspace{2em}
-    \begin{tabular}{|c|c|}
-        \hline
-        št. lomov & št. palic \\
-        \hline
-        \(0\)     & \(157\)   \\
-        \(1\)     & \( 69\)   \\
-        \(2\)     & \( 35\)   \\
-        \(3\)     & \( 17\)   \\
-        \(4\)     & \(  1\)   \\
-        \(5\)     & \(  1\)   \\
-        \hline
-    \end{tabular}
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import csv
+        import random
 
-    \part Ob predpostavki osnovne ničelne domneve ocenite \(p\) po metodi največjega verjetja.
+        with open('../data/Kibergrad.csv', 'r') as f:
+            f.readline()
+            reader = csv.reader(f)
+            kibergrad = list(tuple(map(int, line)) for line in reader)
 
-    \part Združite zadnje tri vrednosti in s posplošenim Pearsonovim preizkusom hi kvadrat preizkusite osnovno ničelno domnevo proti alternativni domnevi, da ima
-    število lomov katero drugo porazdelitev (glejte razdelek 9.5 v knjigi). Še vedno
-    privzamemo, da ima število lomov na vseh palicah enako porazdelitev.
+        kibergrad_by_square = tuple(list(filter(lambda x: x[4] == i+1, kibergrad)) for i in range(4))
+        sample = tuple(random.choices(population=sq, k=100) for sq in kibergrad_by_square)
+        plt.boxplot(x=tuple(list(e[3] for e in sq) for sq in sample))
+        plt.show()
+    \end{minted}
+    \begin{figure}[h!]
+        \includegraphics{fig-1-1.png}
+    \end{figure}
 
-    \part Za \( i ∈ \{1, …, n\} \) naj bodo dana neodvisna opažanja \(Xᵢ ~ \bin{mᵢ}{pᵢ}\), kjer
-    so parametri \(mᵢ\) znani, parametri \(pᵢ\) pa neznani. Razvijte preizkus na podlagi
-    razmerja verjetij, ki bo preizkusil ničelno domnevo, da so vsi parametri \(pᵢ\) enaki,
-    proti alternativni domnevi, da temu ni tako.
+    Sicer vidimo neke manjše razlike (dohodki so malce nižji v južni četrti in malce višji v severni), ampak menim, da četrti ne vplivajo bistveno na dohodek.
 
-    \part Uporabite preizkus iz prejšnje točke na danih podatkih, vedite pa, da Wilksovega izreka ne morete uporabiti (premislite, zakaj pogoji niso izpolnjeni).
-    Namesto tega uporabite metodo \emph{bootstrap}: simulirajte \(10.000\) vrednosti preizkusne statistike pri ničelni domnevi, pri čemer za \(p\) vzemite oceno iz točke \textbf{(a)}. Nato poglejte, koliko teh vrednosti presega vrednost preizkusne statistike, izračunano na konkretnih podatkih. Na podlagi tega ustrezno sklepajte, kaj storiti z ničelno domnevo.
+    \pagebreak
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        sample2 = (sample[0], *(random.choices(population=kibergrad_by_square[0], k=100) for _ in range(4)))
+        plt.boxplot(x=tuple(list(e[3] for e in sq) for sq in sample2))
+        plt.show()
+    \end{minted}
+    \begin{figure}[h!]
+        \includegraphics{fig-1-2.png}
+    \end{figure}
+
+    Graf zgleda približno kot zgornji, kar še bolj utemelji moje mnenje, da četrti ne vplivajo na dohodek.
+
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        incomes_by_square = tuple(list(e[3] for e in sq) for sq in kibergrad_by_square)
+        explained_var = np.var(list(np.mean(sq) for sq in incomes_by_square))
+        residual_var = np.mean(list(np.var(sq) for sq in incomes_by_square))
+        print(f"explained variance: {explained_var}\nresidual variance: {residual_var}")
+    \end{minted}
+    \begin{verbatim}
+        explained variance: 8688785.712368913
+        residual variance: 1027977659.8502393
+    \end{verbatim}
+    Kot vidimo, četrti res ne vplivajo bistveno na dohodek.
 
 \end{homeworkProblem}
 
 \newpage
 
 \begin{homeworkProblem}
-    V neki raziskavi:
-    \[\text{\url{http://www.statsci.org/data/oz/ms212.html}}\]
-    so študentom merili pulz. Vsakemu študentu so pulz izmerili dvakrat.
-    Določeni so imeli med obema meritvama fizično obremenitev (tek na mestu), določeni ne.
-    Podatki so zbrani v tabeli \texttt{Pulz}, pri čemer imajo stolpci naslednje pomene:\\
-    \begin{tabular}{l l}
-        \texttt{VISINA}      & telesna višina                                                        \\
-        \texttt{TEZA}        & telesna teža                                                          \\
-        \texttt{STAROST}     & starost v letih                                                       \\
-        \texttt{SPOL}        & \(1=\)moški, \(2=\)ženski                                             \\
-        \texttt{KADI}        & \(1=\)kadilec, \(2=\)nekadilec                                        \\
-        \texttt{ALKOHOL}     & \(1=\)pije, \(2=\)ne pije                                             \\
-        \texttt{VADBA}       & \(1=\)vadi veliko, \(2=\)vadi zmerno, \(3=\)vadi malo ali pa sploh ne \\
-        \texttt{OBREMENITEV} & \(1=\)obremenitev, \(2=\)brez obremenitve                             \\
-        \texttt{PULZ1}       & prva meritev pulza                                                    \\
-        \texttt{PULZ2}       & druga meritev pulza                                                   \\
-        \texttt{LETO}        & leto meritve \((1993-1998)\)
-    \end{tabular}
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import csv
+        import random
+        import math
 
-    \part Preizkusite, ali to, ali so bili študenti deležni obremenitve, vpliva na spremembo
-    pulza.
+        with open('../data/Palice.csv', 'r') as f:
+            f.readline()
+            reader = csv.reader(f)
+            palice = list(int(line[1]) for line in reader)
 
-    \part Se zdi, da so določeni študenti, ki so bili določeni za obremenitev, morda
-    goljufali in sploh niso tekli? Ilustrirajte s primernim grafičnim prikazom.
+        var('k')
+        f(k, n, p) = (factorial(n)/factorial(k)/factorial(n-k)) * p^k * (1-p)^(n-k)
+        l(p) = sum([log(f(k, 5, p))*(palice[k]) for k in range(6)])
+        p_0 = solve(derivative(l) == 0, p)[0].right()
+    \end{minted}
+    Vrednost \(p₀\) je \(199/1400 ≈ 0.14\).
 
-    \part Pri študentih, ki so bili deležni obremenitve, preizkusite, ali vadba vpliva na
-    spremembo pulza.
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        palice2 = [157, 69, 35, 19]
+        f_tail = f(3, 5, p_0) + f(4, 5, p_0) + f(5, 5, p_0)
+        chi2 = sum([(palice2[k] - 280*f(k, 5, p_0))^2/f(k, 5, p_0) for k in range(3)]) + (19 - 280*f_tail)^2/f_tail
+        chi2 /= 280
+        print(N(chi2))
+        print(N(exp(-chi2/2)))
+    \end{minted}
+    \begin{verbatim}
+        44.1486610184320
+        2.58964401605015e-10
+    \end{verbatim}
+
+    Ker je vrednost \(χ²\) velika lahko ničelno domnevo potrdimo.
+
+    \pagebreak
+    \solution
+    Najprej izračunamo, za katere \(pᵢ\) je verjetje posameznega opažanja največje:
+    \begin{minted}[autogobble,breaklines]{python}
+        var('x')
+        var('p')
+        var('m')
+        f(x, m, p) = (factorial(m)/factorial(x)/factorial(m-x)) * p^x * (1-p)^(m-x)
+        S(x, m, p) = derivative(f(x, m, p), p)
+        solve(S(x, m, p) == 0, p)
+    \end{minted}
+    \begin{verbatim}
+        [p^x == x*(p - 1)*p^(x - 1)/(x - m)]
+    \end{verbatim}
+    Dobimo enačbo \(pᵢˣ = \frac{xᵢ}{mᵢ-xᵢ}(1-pᵢ)⋅pᵢ^{xᵢ-1}\), od koder sledi \(pᵢ=0 ∨ pᵢ = \frac{x}{m}\).
+
+    Razmerje verjetij je potemtakem enako \(Λ = ∏ᵢ\frac{f₁ᵢ}{f₀ᵢ}\), kjer je 
+    \begin{align*}
+        f₀ᵢ &= \binom{mᵢ}{xᵢ} p^{xᵢ} (1-p)^{mᵢ-xᵢ}\\
+        f₁ᵢ &= \binom{mᵢ}{xᵢ} pᵢ^{xᵢ} (1-pᵢ)^{mᵢ-xᵢ} = \binom{mᵢ}{xᵢ}mᵢ^{-mᵢ}xᵢ^{xᵢ}(mᵢ-xᵢ)^{mᵢ-xᵢ}\text{, če je \(xᵢ ≠ 0, mᵢ\) in \(1\) sicer}
+    \end{align*}
+    Potem je \(\frac{f₁ᵢ}{f₀ᵢ} = \left(\frac{pᵢ}{p}\right)^{xᵢ}\left(\frac{1-pᵢ}{1-p}\right)^{mᵢ-xᵢ} = mᵢ^{-mᵢ}\left(\frac{xᵢ}{p}\right)^{xᵢ}\left(\frac{mᵢ-xᵢ}{1-p}\right)^{mᵢ-xᵢ}\)
+
+    Za testno statistiko vzamemo \(T ≔ 2\log Λ \)
+
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        var('k')
+        f0(m, x, p) = p^x * (1-p)^(m-x)
+        f1(m, x, p) = f0(m, x, x/m)
+        f = f1 / f0
+        T = 2*sum([log(f(5,k,p_0))*(palice[k]) for k in range(1,5)])-log(f0(5,0,p_0))*(palice[0])-log(f0(5,5,p_0))*(palice[5])
+        print(N(T))
+    \end{minted}
+    \begin{verbatim}
+        314.379564621130
+    \end{verbatim}
+    \begin{minted}[autogobble,breaklines]{python}
+        sims = list(np.random.binomial(5, p_0, size=280) for _ in range(10000))
+        l = lambda s: 2*sum([log(f(5, k, p_0))*(s[k]) for k in range(1,5)])-log(f0(5,0,p_0))*(s[0])/log(f0(5,5,p_0))*(s[5])
+        ls = list(l(s) for s in sims)
+        c = len(list(filter(lambda e: e > T, ls)))/10000.
+        print(c)
+    \end{minted}
+    \begin{verbatim}
+        0
+    \end{verbatim}
+
+    Nobena od simulacij ni presegla vrednosti testne statistike, torej lahko ničelno domnevo ovržemo.
+\end{homeworkProblem}
+
+\newpage
+
+\begin{homeworkProblem}
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import csv
+        import random
+
+        with open('../data/Pulz.csv', 'r') as f:
+            f.readline()
+            reader = csv.reader(f)
+            pulz = list(tuple(map(float, line)) for line in reader)
+
+        pulz_by_load = tuple(list(filter(lambda x: x[7] == i+1, pulz)) for i in range(2))
+        data = tuple(list(map(lambda x: x[9] - x[8], pulzi)) for pulzi in pulz_by_load)
+        plt.boxplot(data)
+        plt.show()
+    \end{minted}
+    \begin{figure}[h!]
+        \includegraphics{fig-3-1.png}
+    \end{figure}
+    Očitno vidimo, da je prvi stolpec (razlika v pulzu študentov z obremenitvijo) bistveno višje od drugega (razlika v pulzu študentov brez obremenitve).
+
+    \pagebreak
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        data = sorted(list(map(lambda x: x[9] - x[8], pulz_by_load[0])))
+        plt.hist(data, edgecolor='black', bins=15)
+        plt.show()
+    \end{minted}
+    \begin{figure}[h!]
+        \includegraphics{fig-3-2.png}
+    \end{figure}
+    Ker so vse razlike pulzov študentov pod obremenitvijo večje od razlik študentov brez obremenitve, ne moremo sklepati gotovo, da je kdo goljufal,
+    vendar je pa razpon razlik zelo asimetričen, kar je lahko sumljivo, če je to atipično za splošno populacijo. Če predpostavim, da pričakujemo normalno porazdelitev, potem te podatki kažejo na to, da so nekateri študentje vsaj do neke mere goljufali.
+    \begin{minted}[autogobble,breaklines]{python}
+        import diptest
+        diptest.diptest(data)
+    \end{minted}
+    \begin{verbatim}
+        (0.03571428571428571, 0.9609662395003099)
+    \end{verbatim}
+    Če opravimo Hardiganov preizkus dip, dobimo z \(96\%\) gotovostjo, da so podatki unimodalni, kar nakazuje, da do goljufanja morda ni prišlo.
+
+
+    \pagebreak
+    \solution
+    \begin{minted}[autogobble,breaklines]{python}
+        pulz_with_load_by_training = tuple(list(filter(lambda x: x[6] == i+1, pulz_by_load[0])) for i in range(3))
+        data = tuple(list(map(lambda x: x[9] - x[8], pulzi)) for pulzi in pulz_with_load_by_training)
+        plt.boxplot(data)
+        plt.show()
+    \end{minted}
+    \begin{figure}[h!]
+        \includegraphics{fig-3-3.png}
+    \end{figure}
+
+    Podatki ne kažejo, da vadba vpliva na spremembo pulza.
 \end{homeworkProblem}
 
 \end{document}

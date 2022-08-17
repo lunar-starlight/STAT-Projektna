@@ -1,0 +1,7 @@
+src/venv
+doc/main.aux
+doc/main.log
+doc/main.out
+doc/main.pdf
+doc/main.synctex.gz
+doc/_minted-main
